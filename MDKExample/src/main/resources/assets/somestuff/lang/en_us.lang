@@ -1,0 +1,25 @@
+itemGroup.somestufftab=Some Stuff
+
+
+tile.plastic_block.name=Block of Plastic
+tile.copper_ore.name=Copper Ore
+tile.copper_block.name=Block of Copper
+tile.blast_furnace.name=Blast Furnace
+
+
+item.plastic_ingot.name=Plastic Ingot
+item.obsidian_ingot.name=Obsidian Ingot
+item.copper_ingot.name=Copper Ingot
+
+
+item.obsidian_sword.name=Obsidian Sword
+item.obsidian_shovel.name=Obsidian Shovel
+item.obsidian_hoe.name=Obsidian Hoe
+item.obsidian_pickaxe.name=Obsidian Pickaxe
+item.obsidian_axe.name=Obsidian Axe
+
+
+item.obsidian_helmet.name=Obsidian Helmet
+item.obsidian_chestplate.name=Obsidian Chestplate
+item.obsidian_leggings.name=Obsidian Leggings
+item.obsidian_boots.name=Obsidian Boots

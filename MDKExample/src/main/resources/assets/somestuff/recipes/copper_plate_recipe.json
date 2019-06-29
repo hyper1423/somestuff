@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    
+    "ingredients":
+    [
+    
+    {
+        "item": "somestuff:copper_ingot"
+    },
+    
+    {
+        "item": "somestuff:copper_hammer"
+    }
+    
+    ],
+    
+    "result":
+    {
+        "item": "somestuff:copper_plate",
+        "count": 4
+    }
+}

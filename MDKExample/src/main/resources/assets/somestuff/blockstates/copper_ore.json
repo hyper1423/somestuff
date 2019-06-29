@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "somestuff:copper_ore" }
+    }
+}

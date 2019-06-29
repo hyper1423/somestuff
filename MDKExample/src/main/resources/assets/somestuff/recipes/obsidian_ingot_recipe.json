@@ -1,0 +1,34 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    
+    "ingredients":
+    [
+    
+    {
+        "item": "somestuff:plastic_ingot"
+    },
+    
+    {
+        "item": "somestuff:plastic_ingot"
+    },
+    
+    {
+        "item": "somestuff:plastic_ingot"
+    },
+    
+    {
+        "item": "somestuff:plastic_ingot"
+    },
+    
+    {
+        "item": "minecraft:obsidian"
+    }
+    
+    ],
+    
+    "result":
+    {
+        "item": "somestuff:obsidian_ingot",
+        "count": 4
+    }
+}

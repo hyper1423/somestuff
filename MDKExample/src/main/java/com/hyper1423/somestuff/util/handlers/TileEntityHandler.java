@@ -1,0 +1,13 @@
+package com.hyper1423.somestuff.util.handlers;
+
+import com.hyper1423.somestuff.blocks.machines.blastfurnace.TileEntityBlastFurnace;
+import com.hyper1423.somestuff.util.Reference;
+
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+public class TileEntityHandler {
+	public static void registerTileEntities() {
+		GameRegistry.registerTileEntity(TileEntityBlastFurnace.class, new ResourceLocation(Reference.MOD_ID + ":blast_furnace"));
+	}
+}

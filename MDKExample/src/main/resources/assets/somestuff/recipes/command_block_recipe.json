@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#ED",
+        "/Y/",
+        "DE#"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:nether_star"
+        },
+        "E": {
+            "item": "minecraft:end_crystal"
+        },
+        "D": {
+            "item": "minecraft:diamond"
+        },
+        "/": {
+            "item": "minecraft:blaze_rod"
+        },
+        "Y": {
+            "item": "minecraft:emerald"
+        }
+    },
+    "result": {
+        "item": "minecraft:command_block",
+        "count": 1
+    }
+}

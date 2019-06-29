@@ -1,0 +1,34 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "IPI",
+        "PDP",
+        "IPI"
+    ],
+    
+    "key":
+    {
+        "P":
+        {
+            "item": "somestuff:plastic_ingot"
+        },
+        
+        "I":
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        
+        "D":
+        {
+            "item": "minecraft:diamond"
+        }
+    },
+    
+    "result":
+    {
+        "item": "somestuff:plastic_block",
+        "count": 1
+    }
+}

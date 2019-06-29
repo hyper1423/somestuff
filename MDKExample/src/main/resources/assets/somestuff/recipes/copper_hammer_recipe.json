@@ -1,0 +1,28 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "CCC",
+        " / "
+    ],
+    
+    "key":
+    {
+        "C":
+        {
+            "item": "somestuff:copper_ingot"
+        },
+        
+        "/":
+        {
+            "item": "minecraft:stick"
+        }
+    },
+    
+    "result":
+    {
+        "item": "somestuff:copper_hammer",
+        "count": 1
+    }
+}
