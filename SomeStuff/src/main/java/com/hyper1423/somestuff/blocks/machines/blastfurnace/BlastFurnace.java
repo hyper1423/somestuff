@@ -183,7 +183,7 @@ public class BlastFurnace extends Block {
 	}
 
 	@Override
-	public boolean hasTileEntity() {
+	public boolean hasTileEntity(IBlockState state) {
 		// TODO Auto-generated method stub
 		return this.hasTileEntity;
 	}

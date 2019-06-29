@@ -8,5 +8,5 @@ public class Reference {
 	public static final String CLIENT_PROXY_CLASS = "com.hyper1423.somestuff.proxy.ClientProxy";
 	public static final String COMMON_PROXY_CLASS = "com.hyper1423.somestuff.proxy.CommonProxy";
 	
-	public static final int GUI_BLAST_FURNACE = 1;
+	public static final int GUI_BLAST_FURNACE = 0;
 }

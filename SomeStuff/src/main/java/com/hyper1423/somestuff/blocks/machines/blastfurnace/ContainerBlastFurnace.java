@@ -27,9 +27,9 @@ public class ContainerBlastFurnace extends Container {
 			System.out.println("Ouch. I hate this error.|ERR: line 25");
 		if (tileentity == null)
 			System.out.println("Ouch... probably WORST error in the world: NULLPOINTEREXCEPTION.|ERR: line 26");
-		IItemHandler inventory = this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-		System.out.println(
-				this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).equals(inventory));
+		IItemHandler inventory = null/*this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)*/;
+//		System.out.println(
+//				this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).equals(inventory));
 
 		this.addSlotToContainer(new SlotItemHandler(inventory, 0, 35, 17));
 		this.addSlotToContainer(new SlotBlastFurnaceFuel(inventory, 1, 35, 53));
