@@ -17,22 +17,10 @@ import net.minecraft.util.NonNullList;
  */
 public class ItemBase extends Item implements IHasModel {
 
-	/**
-	 * TODO: Removing this class
-	 * @author hyper1423
-	 * @deprecated
-	 * @since 0.0.1
-	 */
 	public ItemBase(String name) {
 		this(name, CreativeTabs.MATERIALS);
 	}
 	
-	/**
-	 * TODO: Removing this class
-	 * @author hyper1423
-	 * @deprecated
-	 * @since 0.0.1
-	 */
 	public ItemBase(String name, CreativeTabs creativeTab) {
 		setUnlocalizedName(name);
 		setRegistryName(name);
