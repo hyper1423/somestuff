@@ -1,5 +1,8 @@
 package com.hyper1423.somestuff.blocks.machines.blastfurnace;
 
+import com.hyper1423.somestuff.blocks.machines.blastfurnace.slots.SlotBlastFurnaceFuel;
+import com.hyper1423.somestuff.blocks.machines.blastfurnace.slots.SlotBlastFurnaceOutput;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -11,28 +14,27 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerBlastFurnace extends Container {
 
 	private final TileEntityBlastFurnace tileentity;
 	private int cookTime, totalCookTime, burnTime, currentBurnTime;
-	private int asdf1;
-	private ItemStackHandler asdf2 = new ItemStackHandler(4);
-	private Integer asdf = null;
 
 	public ContainerBlastFurnace(InventoryPlayer player, TileEntityBlastFurnace tileentity) {
 		this.tileentity = tileentity;
-		if (this.tileentity == null) System.out.println("Ouch. I hate this error.|ERR: line 25");
-		if (tileentity == null) System.out.println("Ouch... probably WORST error in the world: NULLPOINTEREXCEPTION.|ERR: line 26");
+		if (this.tileentity == null)
+			System.out.println("Ouch. I hate this error.|ERR: line 25");
+		if (tileentity == null)
+			System.out.println("Ouch... probably WORST error in the world: NULLPOINTEREXCEPTION.|ERR: line 26");
 		IItemHandler inventory = this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-		System.out.println(this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).equals(inventory));
-		this.asdf1 = this.tileentity.burnTime;
-		this.asdf2 = (ItemStackHandler) this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+		System.out.println(
+				this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).equals(inventory));
 
-//		this.addSlotToContainer(new SlotItemHandler(inventory, 0, 35, 17));
-//		this.addSlotToContainer(new SlotBlastFurnaceFuel(inventory, 1, 35, 53));
-//		this.addSlotToContainer(new SlotBlastFurnaceOutput(player.player, inventory, 2, 95, 35));
-//		this.addSlotToContainer(new SlotBlastFurnaceOutput(player.player, inventory, 3, 143, 53));
+		this.addSlotToContainer(new SlotItemHandler(inventory, 0, 35, 17));
+		this.addSlotToContainer(new SlotBlastFurnaceFuel(inventory, 1, 35, 53));
+		this.addSlotToContainer(new SlotBlastFurnaceOutput(player.player, inventory, 2, 95, 35));
+		this.addSlotToContainer(new SlotBlastFurnaceOutput(player.player, inventory, 3, 143, 53));
 
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 9; x++) {

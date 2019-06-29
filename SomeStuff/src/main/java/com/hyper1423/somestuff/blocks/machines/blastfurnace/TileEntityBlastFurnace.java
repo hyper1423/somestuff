@@ -45,7 +45,7 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 	public int currentBurnTime = 0;
 	public int cookTime = 0;
 	public int totalCookTime = 600;
-
+	
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		// TODO Auto-generated method stub
