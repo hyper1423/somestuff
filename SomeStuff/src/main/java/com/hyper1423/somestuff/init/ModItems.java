@@ -3,7 +3,11 @@ package com.hyper1423.somestuff.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hyper1423.somestuff.items.ItemBase;
+import com.hyper1423.somestuff.items.CopperIngot;
+import com.hyper1423.somestuff.items.CopperPlate;
+import com.hyper1423.somestuff.items.ObsidianIngot;
+import com.hyper1423.somestuff.items.PlasticIngot;
+import com.hyper1423.somestuff.items.Slag;
 import com.hyper1423.somestuff.items.armor.ArmorBase;
 import com.hyper1423.somestuff.items.tools.ToolAxe;
 import com.hyper1423.somestuff.items.tools.ToolHammer;
@@ -35,17 +39,17 @@ public class ModItems {
 			new int[] {6, 12, 8, 6}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.0F);
 	
 	//items
-	public static final Item SLAG = new ItemBase("slag");
+	public static final Item SLAG = new Slag("slag");
 	
 	
 	//plates
-	public static final Item COPPER_PLATE = new ItemBase("copper_plate");
+	public static final Item COPPER_PLATE = new CopperPlate("copper_plate");
 	
 	
 	//ingots
-	public static final Item PLASTIC_INGOT = new ItemBase("plastic_ingot");
-	public static final Item OBSIDIAN_INGOT = new ItemBase("obsidian_ingot");
-	public static final Item COPPER_INGOT = new ItemBase("copper_ingot");
+	public static final Item PLASTIC_INGOT = new PlasticIngot("plastic_ingot");
+	public static final Item OBSIDIAN_INGOT = new ObsidianIngot("obsidian_ingot");
+	public static final Item COPPER_INGOT = new CopperIngot("copper_ingot");
 	
 	
 	//tools
