@@ -23,27 +23,23 @@ public class ContainerBlastFurnace extends Container {
 
 	public ContainerBlastFurnace(InventoryPlayer player, TileEntityBlastFurnace tileentity) {
 		this.tileentity = tileentity;
-		if (this.tileentity == null)
-			System.out.println("Ouch. I hate this error.|ERR: line 27");
-		if (tileentity == null)
-			System.out.println("Ouch... probably WORST error in the world: NULLPOINTEREXCEPTION.|ERR: line 29");
-		IItemHandler inventory = this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-//		System.out.println(
-//				this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).equals(inventory));
+		if (this.tileentity != null) {
+			IItemHandler inventory = this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+			
+			this.addSlotToContainer(new SlotItemHandler(inventory, 0, 35, 17));
+			this.addSlotToContainer(new SlotBlastFurnaceFuel(inventory, 1, 35, 53));
+			this.addSlotToContainer(new SlotBlastFurnaceOutput(player.player, inventory, 2, 95, 35));
+			this.addSlotToContainer(new SlotBlastFurnaceOutput(player.player, inventory, 3, 143, 53));
 
-		this.addSlotToContainer(new SlotItemHandler(inventory, 0, 35, 17));
-		this.addSlotToContainer(new SlotBlastFurnaceFuel(inventory, 1, 35, 53));
-		this.addSlotToContainer(new SlotBlastFurnaceOutput(player.player, inventory, 2, 95, 35));
-		this.addSlotToContainer(new SlotBlastFurnaceOutput(player.player, inventory, 3, 143, 53));
-
-		for (int y = 0; y < 3; y++) {
-			for (int x = 0; x < 9; x++) {
-				this.addSlotToContainer(new Slot(player, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
+			for (int y = 0; y < 3; y++) {
+				for (int x = 0; x < 9; x++) {
+					this.addSlotToContainer(new Slot(player, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
+				}
 			}
-		}
 
-		for (int x = 0; x < 9; x++) {
-			this.addSlotToContainer(new Slot(player, x, 8 + x * 18, 142));
+			for (int x = 0; x < 9; x++) {
+				this.addSlotToContainer(new Slot(player, x, 8 + x * 18, 142));
+			}
 		}
 	}
 

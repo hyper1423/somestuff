@@ -21,7 +21,7 @@ public class BlastFurnaceRecipes {
 
 	private BlastFurnaceRecipes() {
 		addRecipe(new ItemStack(Blocks.ACACIA_FENCE),
-				new ItemStack(ModItems.SLUG), 5.0F);
+				new ItemStack(ModItems.SLAG), 5.0F);
 	}
 
 	public void addRecipe(ItemStack input, ItemStack result, float experience) {

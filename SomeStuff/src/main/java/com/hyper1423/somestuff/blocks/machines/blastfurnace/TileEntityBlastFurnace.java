@@ -1,9 +1,13 @@
 package com.hyper1423.somestuff.blocks.machines.blastfurnace;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.hyper1423.somestuff.init.ModItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -18,9 +22,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
@@ -33,6 +39,7 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 	private ItemStackHandler inventory = new ItemStackHandler(NonNullList.withSize(4, ItemStack.EMPTY));
 	private String customName;
 	private ItemStack smelting = ItemStack.EMPTY;
+	private static final Logger LOGGER = LogManager.getLogger();
 
 	private static final String BURNTIME_KEY = "BurnTime";
 	private static final String COOKTIME_KEY = "CookTime";
@@ -46,6 +53,9 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 	public int cookTime = 0;
 	public int totalCookTime = 600;
 	
+	public TileEntityBlastFurnace() {
+		LOGGER.info("TileEntity is successfully bound to BlastFurnace block");
+	}
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		// TODO Auto-generated method stub
@@ -74,7 +84,7 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 	@Override
 	public ITextComponent getDisplayName() {
 		return this.hasCustomName() ? new TextComponentString(this.customName)
-				: new TextComponentTranslation("container.blast_furnace");
+				: new TextComponentTranslation("");
 	}
 
 	@Override
@@ -152,12 +162,11 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 					if (inventory.getStackInSlot(3).getCount() > 0) {
 						inventory.getStackInSlot(3).grow(1);
 					} else {
-						inventory.insertItem(3, new ItemStack(ModItems.SLUG, 1), false);
+						inventory.insertItem(3, new ItemStack(ModItems.SLAG, 1), false);
 					}
+					smelting = ItemStack.EMPTY;
+					cookTime = 0;
 				}
-
-				smelting = ItemStack.EMPTY;
-				cookTime = 0;
 				return;
 			}
 
@@ -224,6 +233,16 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 						|| block == Blocks.BIRCH_STAIRS || block == Blocks.DARK_OAK_STAIRS
 						|| block == Blocks.SPRUCE_STAIRS)
 					return 150;
+				if (block == Blocks.ACACIA_FENCE || block == Blocks.OAK_FENCE || block == Blocks.JUNGLE_FENCE
+						|| block == Blocks.BIRCH_FENCE || block == Blocks.DARK_OAK_FENCE
+						|| block == Blocks.SPRUCE_FENCE
+						
+						||
+						
+					block == Blocks.ACACIA_FENCE_GATE || block == Blocks.OAK_FENCE_GATE || block == Blocks.JUNGLE_FENCE_GATE
+						|| block == Blocks.BIRCH_FENCE_GATE || block == Blocks.DARK_OAK_FENCE_GATE
+						|| block == Blocks.SPRUCE_FENCE_GATE)
+					return 100;
 				if (block.getDefaultState().getMaterial() == Material.WOOD)
 					return 200;
 				if (block == Blocks.COAL_BLOCK)
@@ -255,6 +274,12 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 		return getItemBurnTime(fuel) > 0;
 	}
 
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		// TODO Auto-generated method stub
+		return (!oldState.getBlock().equals(newState.getBlock())) || (!oldState.equals(newState));
+	}
+	
 	public boolean isUsableByPlayer(EntityPlayer player) {
 
 		return world.getTileEntity(pos) != this ? false

@@ -35,14 +35,17 @@ public class ModItems {
 			new int[] {6, 12, 8, 6}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.0F);
 	
 	//items
-	public static final Item PLASTIC_INGOT = new ItemBase("plastic_ingot");
-	public static final Item OBSIDIAN_INGOT = new ItemBase("obsidian_ingot");
-	public static final Item COPPER_INGOT = new ItemBase("copper_ingot");
-	public static final ItemBase SLUG = new ItemBase("slug");
+	public static final Item SLAG = new ItemBase("slag");
 	
 	
 	//plates
 	public static final Item COPPER_PLATE = new ItemBase("copper_plate");
+	
+	
+	//ingots
+	public static final Item PLASTIC_INGOT = new ItemBase("plastic_ingot");
+	public static final Item OBSIDIAN_INGOT = new ItemBase("obsidian_ingot");
+	public static final Item COPPER_INGOT = new ItemBase("copper_ingot");
 	
 	
 	//tools

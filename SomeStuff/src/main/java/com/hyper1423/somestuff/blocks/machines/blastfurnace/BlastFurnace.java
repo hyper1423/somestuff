@@ -9,6 +9,7 @@ import com.hyper1423.somestuff.util.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -35,11 +36,11 @@ public class BlastFurnace extends Block {
 
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	public static final PropertyBool BURNING = PropertyBool.create("burning");
-	
+
 	public BlastFurnace(String name, Material material) {
 		this(name, material, Main.someStuff);
 	}
-
+	
 	public BlastFurnace(String name, Material material, CreativeTabs creativeTab) {
 		super(material);
 		setUnlocalizedName(name);
@@ -185,12 +186,13 @@ public class BlastFurnace extends Block {
 	@Override
 	public boolean hasTileEntity(IBlockState state) {
 		// TODO Auto-generated method stub
-		return this.hasTileEntity;
+		return true;
 	}
-
+	
 	@Override
 	public TileEntityBlastFurnace createTileEntity(World world, IBlockState state) {
 		// TODO Auto-generated method stub
+		TileEntityBlastFurnace te = new TileEntityBlastFurnace();
 		return new TileEntityBlastFurnace();
 	}
 }

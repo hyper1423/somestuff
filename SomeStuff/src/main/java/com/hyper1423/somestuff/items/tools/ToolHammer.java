@@ -7,7 +7,7 @@ import com.hyper1423.somestuff.util.IHasModel;
 
 import net.minecraft.creativetab.CreativeTabs;
 
-public class ToolHammer extends ItemHammer implements IHasModel {
+public class ToolHammer extends ItemHammer {
 	public ToolHammer(String name, ToolMaterial material) {
 		super(material);
 		setUnlocalizedName(name);
@@ -17,7 +17,6 @@ public class ToolHammer extends ItemHammer implements IHasModel {
 		ModItems.ITEMS.add(this);
 	}
 
-	@Override
 	public void registerModels() {
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}

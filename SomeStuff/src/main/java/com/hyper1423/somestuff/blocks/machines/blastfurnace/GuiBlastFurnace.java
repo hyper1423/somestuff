@@ -38,6 +38,7 @@ public class GuiBlastFurnace extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 		this.mc.getTextureManager().bindTexture(TEXTURES);
+		this.drawDefaultBackground();
 		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
 		if (TileEntityBlastFurnace.isBurning(tileentity)) {
@@ -45,8 +46,8 @@ public class GuiBlastFurnace extends GuiContainer {
 			this.drawTexturedModalRect(this.guiLeft + 36, this.guiTop + 37 + 12 - k, 176, 12 - k, 14, k + 1);
 		}
 
-		int l = this.getCookProgressScaled(24);
-		this.drawTexturedModalRect(this.guiLeft + 58, this.guiTop + 35, 176, 14, l + 1, 16);
+		int l = this.getCookProgressScaled(22);
+		this.drawTexturedModalRect(this.guiLeft + 59, this.guiTop + 32, 176, 14, l - 1, 22);
 	}
 
 	private int getBurnLeftScaled(int pixels) {

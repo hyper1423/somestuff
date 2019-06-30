@@ -33,17 +33,11 @@ public class RegistryHandler {
 	public static void onModelRegister(ModelRegistryEvent event) {
 
 		for (Item item : ModItems.ITEMS) {
-
-			if (item instanceof IHasModel) {
-				((IHasModel) item).registerModels();
-			}
+			Main.proxy.registerItemRenderer(item, 0, "inventory");
 		}
 		
 		for (Block block : ModBlocks.BLOCKS) {
-
-			if (block instanceof IHasModel) {
-				((IHasModel) block).registerModels();
-			}
+			Main.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
 		}
 	}
 	
