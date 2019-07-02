@@ -1,7 +1,9 @@
-package com.hyper1423.somestuff.blocks.machines.blastfurnace;
+package com.hyper1423.somestuff.containers;
 
-import com.hyper1423.somestuff.blocks.machines.blastfurnace.slots.SlotBlastFurnaceFuel;
-import com.hyper1423.somestuff.blocks.machines.blastfurnace.slots.SlotBlastFurnaceOutput;
+import com.hyper1423.somestuff.recipes.BlastFurnaceRecipes;
+import com.hyper1423.somestuff.slots.SlotBlastFurnaceFuel;
+import com.hyper1423.somestuff.slots.SlotBlastFurnaceOutput;
+import com.hyper1423.somestuff.tileentities.TileEntityBlastFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,7 +15,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerBlastFurnace extends Container {

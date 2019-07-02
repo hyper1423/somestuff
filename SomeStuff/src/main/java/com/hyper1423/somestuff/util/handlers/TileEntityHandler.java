@@ -1,6 +1,6 @@
 package com.hyper1423.somestuff.util.handlers;
 
-import com.hyper1423.somestuff.blocks.machines.blastfurnace.TileEntityBlastFurnace;
+import com.hyper1423.somestuff.tileentities.TileEntityBlastFurnace;
 import com.hyper1423.somestuff.util.Reference;
 
 import net.minecraft.util.ResourceLocation;

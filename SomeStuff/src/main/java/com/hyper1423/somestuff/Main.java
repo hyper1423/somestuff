@@ -1,9 +1,9 @@
 package com.hyper1423.somestuff;
 
-import com.hyper1423.somestuff.blocks.machines.blastfurnace.TileEntityBlastFurnace;
 import com.hyper1423.somestuff.init.ModRecipes;
 import com.hyper1423.somestuff.proxy.CommonProxy;
 import com.hyper1423.somestuff.tabs.SSTab;
+import com.hyper1423.somestuff.tileentities.TileEntityBlastFurnace;
 import com.hyper1423.somestuff.util.Reference;
 import com.hyper1423.somestuff.util.handlers.RegistryHandler;
 import com.hyper1423.somestuff.world.ModWorldGen;

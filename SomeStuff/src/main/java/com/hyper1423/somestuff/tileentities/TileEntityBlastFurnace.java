@@ -1,9 +1,11 @@
-package com.hyper1423.somestuff.blocks.machines.blastfurnace;
+package com.hyper1423.somestuff.tileentities;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.hyper1423.somestuff.blocks.BlockBlastFurnace;
 import com.hyper1423.somestuff.init.ModItems;
+import com.hyper1423.somestuff.recipes.BlastFurnaceRecipes;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -23,6 +25,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -37,7 +40,7 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 
 	private ItemStackHandler inventory = new ItemStackHandler(NonNullList.withSize(4, ItemStack.EMPTY));
-	private String customName;
+	private String customName = "container_blast_furnace";
 	private ItemStack smelting = ItemStack.EMPTY;
 	private static final Logger LOGGER = LogManager.getLogger();
 
@@ -52,10 +55,11 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 	public int currentBurnTime = 0;
 	public int cookTime = 0;
 	public int totalCookTime = 600;
-	
+
 	public TileEntityBlastFurnace() {
 		LOGGER.info("TileEntity is successfully bound to BlastFurnace block");
 	}
+
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		// TODO Auto-generated method stub
@@ -63,7 +67,7 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 			return true;
 		return super.hasCapability(capability, facing);
 	}
-	
+
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		// TODO Auto-generated method stub
@@ -84,7 +88,7 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 	@Override
 	public ITextComponent getDisplayName() {
 		return this.hasCustomName() ? new TextComponentString(this.customName)
-				: new TextComponentTranslation("");
+				: new TextComponentTranslation("container_blast_furnace");
 	}
 
 	@Override
@@ -95,6 +99,7 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 		burnTime = compound.getInteger(BURNTIME_KEY);
 		cookTime = compound.getInteger(COOKTIME_KEY);
 		totalCookTime = compound.getInteger(COOKTIMETOTAL_KEY);
+		customName = compound.getString(CUSTOMNAME_KEY);
 		currentBurnTime = getItemBurnTime((ItemStack) inventory.getStackInSlot(1));
 
 		if (compound.hasKey(CUSTOMNAME_KEY, 8))
@@ -108,6 +113,8 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 		compound.setInteger(BURNTIME_KEY, (short) burnTime);
 		compound.setInteger(COOKTIME_KEY, (short) cookTime);
 		compound.setInteger(COOKTIMETOTAL_KEY, (short) totalCookTime);
+		if (this.hasCustomName())
+			compound.setString(CUSTOMNAME_KEY, customName);
 		compound.setTag(INVENTORY_KEY, this.inventory.serializeNBT());
 
 		if (hasCustomName())
@@ -129,7 +136,7 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 
 		if (isBurning()) {
 			--burnTime;
-			BlastFurnace.setState(true, world, pos);
+			BlockBlastFurnace.setState(true, world, pos);
 		}
 		ItemStack fuel = (ItemStack) inventory.getStackInSlot(1);
 
@@ -166,24 +173,28 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 					}
 					smelting = ItemStack.EMPTY;
 					cookTime = 0;
+					inventory.getStackInSlot(0).shrink(1);
 				}
 				return;
-			}
-
-//			} else if (!isBurning() && cookTime > 0) {
-//				if (cookTime > getCookTime(inventory.getStackInSlot(1)) / 3)
-//					cookTime = MathHelper.clamp(cookTime - 3, 0, totalCookTime);
-//				else
-//					MathHelper.clamp(cookTime - 2, 0, totalCookTime);
-			else {
+			} else {
 				if (this.canSmelt() && this.isBurning()) {
 					ItemStack output = BlastFurnaceRecipes.getInstance().getResult(inventory.getStackInSlot(0));
 					if (!output.isEmpty()) {
 						smelting = output;
 						cookTime++;
-						inventory.getStackInSlot(0).shrink(1);
 					}
 				}
+			}
+		} else if (inventory.getStackInSlot(0).isEmpty()) {
+			cookTime = 0;
+		}
+		if (!isBurning()) {
+			BlockBlastFurnace.setState(false, world, pos);
+			if (cookTime > 0) {
+				if (cookTime > (totalCookTime / 2))
+					cookTime = MathHelper.clamp(cookTime - 4, 0, totalCookTime);
+				else
+					cookTime = MathHelper.clamp(cookTime - 2, 0, totalCookTime);
 			}
 		}
 //			if (flag != isBurning()) {
@@ -234,14 +245,13 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 						|| block == Blocks.SPRUCE_STAIRS)
 					return 150;
 				if (block == Blocks.ACACIA_FENCE || block == Blocks.OAK_FENCE || block == Blocks.JUNGLE_FENCE
-						|| block == Blocks.BIRCH_FENCE || block == Blocks.DARK_OAK_FENCE
-						|| block == Blocks.SPRUCE_FENCE
-						
+						|| block == Blocks.BIRCH_FENCE || block == Blocks.DARK_OAK_FENCE || block == Blocks.SPRUCE_FENCE
+
 						||
-						
-					block == Blocks.ACACIA_FENCE_GATE || block == Blocks.OAK_FENCE_GATE || block == Blocks.JUNGLE_FENCE_GATE
-						|| block == Blocks.BIRCH_FENCE_GATE || block == Blocks.DARK_OAK_FENCE_GATE
-						|| block == Blocks.SPRUCE_FENCE_GATE)
+
+						block == Blocks.ACACIA_FENCE_GATE || block == Blocks.OAK_FENCE_GATE
+						|| block == Blocks.JUNGLE_FENCE_GATE || block == Blocks.BIRCH_FENCE_GATE
+						|| block == Blocks.DARK_OAK_FENCE_GATE || block == Blocks.SPRUCE_FENCE_GATE)
 					return 100;
 				if (block.getDefaultState().getMaterial() == Material.WOOD)
 					return 200;
@@ -279,7 +289,7 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 		// TODO Auto-generated method stub
 		return (!oldState.getBlock().equals(newState.getBlock())) || (!oldState.equals(newState));
 	}
-	
+
 	public boolean isUsableByPlayer(EntityPlayer player) {
 
 		return world.getTileEntity(pos) != this ? false

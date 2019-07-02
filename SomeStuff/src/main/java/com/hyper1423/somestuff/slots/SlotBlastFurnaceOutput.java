@@ -1,4 +1,4 @@
-package com.hyper1423.somestuff.blocks.machines.blastfurnace.slots;
+package com.hyper1423.somestuff.slots;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

@@ -11,6 +11,8 @@ item.plastic_ingot.name=Plastic Ingot
 item.obsidian_ingot.name=Obsidian Ingot
 item.copper_ingot.name=Copper Ingot
 
+item.slag.name=Slag
+
 
 item.obsidian_sword.name=Obsidian Sword
 item.obsidian_shovel.name=Obsidian Shovel

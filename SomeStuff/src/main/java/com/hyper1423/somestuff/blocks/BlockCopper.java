@@ -12,12 +12,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-public class CopperBlock extends Block implements IHasModel {
-	public CopperBlock(String name, Material material) {
+public class BlockCopper extends Block implements IHasModel {
+	public BlockCopper(String name, Material material) {
 		this(name, material, Main.someStuff);
 	}
 
-	public CopperBlock(String name, Material material, CreativeTabs creativeTab) {
+	public BlockCopper(String name, Material material, CreativeTabs creativeTab) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);

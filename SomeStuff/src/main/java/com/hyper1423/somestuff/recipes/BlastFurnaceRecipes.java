@@ -1,4 +1,4 @@
-package com.hyper1423.somestuff.blocks.machines.blastfurnace;
+package com.hyper1423.somestuff.recipes;
 
 import java.util.Map;
 import java.util.Map.Entry;

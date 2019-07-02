@@ -1,6 +1,6 @@
-package com.hyper1423.somestuff.blocks.machines.blastfurnace.slots;
+package com.hyper1423.somestuff.slots;
 
-import com.hyper1423.somestuff.blocks.machines.blastfurnace.TileEntityBlastFurnace;
+import com.hyper1423.somestuff.tileentities.TileEntityBlastFurnace;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;

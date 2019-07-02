@@ -1,10 +1,11 @@
-package com.hyper1423.somestuff.blocks.machines.blastfurnace;
+package com.hyper1423.somestuff.blocks;
 
 import java.util.Random;
 
 import com.hyper1423.somestuff.Main;
 import com.hyper1423.somestuff.init.ModBlocks;
 import com.hyper1423.somestuff.init.ModItems;
+import com.hyper1423.somestuff.tileentities.TileEntityBlastFurnace;
 import com.hyper1423.somestuff.util.Reference;
 
 import net.minecraft.block.Block;
@@ -32,16 +33,16 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlastFurnace extends Block {
+public class BlockBlastFurnace extends Block {
 
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	public static final PropertyBool BURNING = PropertyBool.create("burning");
 
-	public BlastFurnace(String name, Material material) {
+	public BlockBlastFurnace(String name, Material material) {
 		this(name, material, Main.someStuff);
 	}
 	
-	public BlastFurnace(String name, Material material, CreativeTabs creativeTab) {
+	public BlockBlastFurnace(String name, Material material, CreativeTabs creativeTab) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);

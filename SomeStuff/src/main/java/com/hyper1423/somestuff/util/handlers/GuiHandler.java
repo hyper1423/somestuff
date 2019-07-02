@@ -2,9 +2,9 @@ package com.hyper1423.somestuff.util.handlers;
 
 import java.util.logging.Logger;
 
-import com.hyper1423.somestuff.blocks.machines.blastfurnace.ContainerBlastFurnace;
-import com.hyper1423.somestuff.blocks.machines.blastfurnace.GuiBlastFurnace;
-import com.hyper1423.somestuff.blocks.machines.blastfurnace.TileEntityBlastFurnace;
+import com.hyper1423.somestuff.containers.ContainerBlastFurnace;
+import com.hyper1423.somestuff.gui.GuiBlastFurnace;
+import com.hyper1423.somestuff.tileentities.TileEntityBlastFurnace;
 import com.hyper1423.somestuff.util.Reference;
 
 import net.minecraft.entity.player.EntityPlayer;

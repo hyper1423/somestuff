@@ -12,12 +12,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-public class PlasticBlock extends Block implements IHasModel {
-	public PlasticBlock(String name, Material material) {
+public class BlockPlastic extends Block implements IHasModel {
+	public BlockPlastic(String name, Material material) {
 		this(name, material, Main.someStuff);
 	}
 
-	public PlasticBlock(String name, Material material, CreativeTabs creativeTab) {
+	public BlockPlastic(String name, Material material, CreativeTabs creativeTab) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);

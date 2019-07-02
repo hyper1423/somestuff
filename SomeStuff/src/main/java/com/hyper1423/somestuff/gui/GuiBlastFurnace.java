@@ -1,5 +1,7 @@
-package com.hyper1423.somestuff.blocks.machines.blastfurnace;
+package com.hyper1423.somestuff.gui;
 
+import com.hyper1423.somestuff.containers.ContainerBlastFurnace;
+import com.hyper1423.somestuff.tileentities.TileEntityBlastFurnace;
 import com.hyper1423.somestuff.util.Reference;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -27,6 +29,7 @@ public class GuiBlastFurnace extends GuiContainer {
 		// TODO Auto-generated method stub
 		if (this.tileentity.getDisplayName() != null) {
 			String tileName = this.tileentity.getDisplayName().getUnformattedText();
+			if (!tileName.equals("container_blast_furnace"))
 			this.fontRenderer.drawString(tileName,
 					(this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2) + 3, 8, 0x404040);
 			this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2,
@@ -38,7 +41,6 @@ public class GuiBlastFurnace extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 		this.mc.getTextureManager().bindTexture(TEXTURES);
-		this.drawDefaultBackground();
 		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
 		if (TileEntityBlastFurnace.isBurning(tileentity)) {
@@ -48,6 +50,14 @@ public class GuiBlastFurnace extends GuiContainer {
 
 		int l = this.getCookProgressScaled(22);
 		this.drawTexturedModalRect(this.guiLeft + 59, this.guiTop + 32, 176, 14, l - 1, 22);
+	}
+	
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		// TODO Auto-generated method stub
+		this.drawDefaultBackground();
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		this.renderHoveredToolTip(mouseX, mouseY);
 	}
 
 	private int getBurnLeftScaled(int pixels) {

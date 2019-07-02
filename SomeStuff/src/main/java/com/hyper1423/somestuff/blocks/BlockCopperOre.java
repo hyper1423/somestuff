@@ -15,12 +15,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-public class CopperOre extends Block implements IHasModel {
-	public CopperOre(String name, Material material) {
+public class BlockCopperOre extends Block implements IHasModel {
+	public BlockCopperOre(String name, Material material) {
 		this(name, material, Main.someStuff);
 	}
 
-	public CopperOre(String name, Material material, CreativeTabs creativeTab) {
+	public BlockCopperOre(String name, Material material, CreativeTabs creativeTab) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
