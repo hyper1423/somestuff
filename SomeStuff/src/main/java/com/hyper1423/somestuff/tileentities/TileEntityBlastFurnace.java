@@ -1,5 +1,7 @@
 package com.hyper1423.somestuff.tileentities;
 
+import java.util.ArrayList;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,12 +37,13 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 
 	private ItemStackHandler inventory = new ItemStackHandler(NonNullList.withSize(4, ItemStack.EMPTY));
-	private String customName = "container_blast_furnace";
+	private String customName = "";
 	private ItemStack smelting = ItemStack.EMPTY;
 	private static final Logger LOGGER = LogManager.getLogger();
 
@@ -60,6 +63,9 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 		LOGGER.info("TileEntity is successfully bound to BlastFurnace block");
 	}
 
+	static {
+		
+	}
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		// TODO Auto-generated method stub
@@ -88,7 +94,7 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 	@Override
 	public ITextComponent getDisplayName() {
 		return this.hasCustomName() ? new TextComponentString(this.customName)
-				: new TextComponentTranslation("container_blast_furnace");
+				: new TextComponentTranslation("Blast Furnace");
 	}
 
 	@Override
@@ -305,5 +311,13 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 		else {
 			return isItemFuel(stack);
 		}
+	}
+	
+	public final ArrayList<ItemStack> containerLists() {
+		ArrayList<ItemStack> stackList = new ArrayList(inventory.getSlots());
+		for (int i = 0; i < inventory.getSlots(); i++) {
+			stackList.add(inventory.getStackInSlot(i));
+		}
+		return stackList;
 	}
 }

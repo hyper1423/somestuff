@@ -29,7 +29,6 @@ public class GuiBlastFurnace extends GuiContainer {
 		// TODO Auto-generated method stub
 		if (this.tileentity.getDisplayName() != null) {
 			String tileName = this.tileentity.getDisplayName().getUnformattedText();
-			if (!tileName.equals("container_blast_furnace"))
 			this.fontRenderer.drawString(tileName,
 					(this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2) + 3, 8, 0x404040);
 			this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2,

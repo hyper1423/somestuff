@@ -3,14 +3,11 @@ package com.hyper1423.somestuff;
 import com.hyper1423.somestuff.init.ModRecipes;
 import com.hyper1423.somestuff.proxy.CommonProxy;
 import com.hyper1423.somestuff.tabs.SSTab;
-import com.hyper1423.somestuff.tileentities.TileEntityBlastFurnace;
 import com.hyper1423.somestuff.util.Reference;
 import com.hyper1423.somestuff.util.handlers.RegistryHandler;
 import com.hyper1423.somestuff.world.ModWorldGen;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
