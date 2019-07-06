@@ -6,10 +6,12 @@ import java.util.List;
 import com.hyper1423.somestuff.blocks.BlockBlastFurnace;
 import com.hyper1423.somestuff.blocks.BlockCopper;
 import com.hyper1423.somestuff.blocks.BlockCopperOre;
+import com.hyper1423.somestuff.blocks.BlockFluidMoltenIron;
 import com.hyper1423.somestuff.blocks.BlockPlastic;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraftforge.fluids.BlockFluidClassic;
 
 public class ModBlocks{
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
@@ -18,4 +20,6 @@ public class ModBlocks{
 			public static final Block COPPER_ORE = new BlockCopperOre("copper_ore", Material.ROCK);
 			public static final Block COPPER_BLOCK = new BlockCopper("copper_block", Material.IRON);
 			public static final Block BLAST_FURNACE = new BlockBlastFurnace("blast_furnace", Material.LAVA);
+			
+			public static final BlockFluidClassic BLOCK_MOLTEN_IRON = new BlockFluidMoltenIron(ModFluids.MOLTEN_IRON);
 }

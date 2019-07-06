@@ -7,14 +7,23 @@ import com.hyper1423.somestuff.blocks.BlockFluidMoltenIron;
 import com.hyper1423.somestuff.fluids.FluidMoltenIron;
 import com.hyper1423.somestuff.util.Reference;
 
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.BlockFluidFinite;
+import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class ModFluids {
-	public static final List<Fluid> FLUIDS = new ArrayList<Fluid>();
+	public static final NonNullList<Fluid> FLUIDS = NonNullList.<Fluid>create();
 
 	public static final Fluid MOLTEN_IRON = new FluidMoltenIron("molten_iron",
-			new ResourceLocation(Reference.MOD_ID, "molten_iron_still"), new ResourceLocation(Reference.MOD_ID, "molten_iron_flowing"));
-	public static final BlockFluidFinite BLOCK_MOLTEN_IRON = new BlockFluidMoltenIron(MOLTEN_IRON);
+			new ResourceLocation(Reference.MOD_ID, "fluids/molten_iron_still"), new ResourceLocation(Reference.MOD_ID, "fluids/molten_iron_flow"));
+
+	
+	public static void registerFluids(List<Fluid> fluids) {
+		for (Fluid fluid : fluids) {
+			FluidRegistry.registerFluid(fluid);
+			FluidRegistry.addBucketForFluid(fluid);
+		}
+	}
 }

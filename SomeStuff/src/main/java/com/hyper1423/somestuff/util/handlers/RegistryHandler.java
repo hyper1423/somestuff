@@ -36,18 +36,6 @@ public class RegistryHandler {
 		event.getRegistry().registerAll(ModBlocks.BLOCKS.toArray(new Block[0]));
 		TileEntityHandler.registerTileEntities();
 	}
-	/** This method registers fluids.
-	 * 
-	 * @param fluids
-	 * @param blockfluids
-	 */
-	public static void registerFluids(List<Fluid> fluids) {
-		FluidRegistry.enableUniversalBucket();
-		for (Fluid fluid : fluids) {
-			FluidRegistry.registerFluid(fluid);
-			FluidRegistry.addBucketForFluid(fluid);
-		}
-	}
 	
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent event) {
@@ -62,7 +50,9 @@ public class RegistryHandler {
 	}
 	
 	public static void preInitRegistries() {
-		registerFluids(ModFluids.FLUIDS);
+		ModFluids.registerFluids(ModFluids.FLUIDS);
+		
+		RenderHandler.registerCustomMeshesAndStates();
 	}
 	
 	public static void initRegistries() {

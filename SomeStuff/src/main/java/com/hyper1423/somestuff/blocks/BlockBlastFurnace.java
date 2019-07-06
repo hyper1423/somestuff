@@ -154,12 +154,6 @@ public class BlockBlastFurnace extends Block {
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state) {
-		// TODO Auto-generated method stub
-		return EnumBlockRenderType.MODEL;
-	}
-
-	@Override
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
 		// TODO Auto-generated method stub
 		return state.withProperty(FACING, rot.rotate((EnumFacing) state.getValue(FACING)));
