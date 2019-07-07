@@ -209,7 +209,8 @@ public class BlockBlastFurnace extends Block {
 		}
 		super.breakBlock(worldIn, pos, state);
 	}
-
+	
+	@Override
 	@SuppressWarnings("incomplete-switch")
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
