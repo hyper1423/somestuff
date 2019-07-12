@@ -6,7 +6,10 @@ import com.hyper1423.somestuff.Main;
 import com.hyper1423.somestuff.init.ModBlocks;
 import com.hyper1423.somestuff.init.ModFluids;
 import com.hyper1423.somestuff.init.ModItems;
+import com.hyper1423.somestuff.init.ModRecipes;
 import com.hyper1423.somestuff.util.IHasModel;
+import com.hyper1423.somestuff.util.compat.OreDictionaryCompat;
+import com.hyper1423.somestuff.world.ModWorldGen;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -51,12 +54,14 @@ public class RegistryHandler {
 	
 	public static void preInitRegistries() {
 		ModFluids.registerFluids(ModFluids.FLUIDS);
-		
 		RenderHandler.registerCustomMeshesAndStates();
+		GameRegistry.registerWorldGenerator(new ModWorldGen(), 3);
 	}
 	
 	public static void initRegistries() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
+		OreDictionaryCompat.registerOres();
+		ModRecipes.init();
 	}
 	
 	public static void postInitRegistries() {

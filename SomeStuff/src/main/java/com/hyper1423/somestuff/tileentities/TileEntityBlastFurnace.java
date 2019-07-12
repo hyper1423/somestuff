@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.hyper1423.somestuff.blocks.BlockBlastFurnace;
+import com.hyper1423.somestuff.block.BlockBlastFurnace;
 import com.hyper1423.somestuff.init.ModItems;
 import com.hyper1423.somestuff.recipes.BlastFurnaceRecipes;
 
@@ -63,12 +63,8 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 		LOGGER.info("TileEntity is successfully bound to BlastFurnace block");
 	}
 
-	static {
-		
-	}
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		// TODO Auto-generated method stub
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return true;
 		return super.hasCapability(capability, facing);
@@ -76,7 +72,6 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		// TODO Auto-generated method stub
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return (T) this.inventory;
 		return super.getCapability(capability, facing);
@@ -101,7 +96,9 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 	public void readFromNBT(NBTTagCompound compound) {
 
 		super.readFromNBT(compound);
+
 		this.inventory.deserializeNBT(compound.getCompoundTag(INVENTORY_KEY));
+
 		burnTime = compound.getInteger(BURNTIME_KEY);
 		cookTime = compound.getInteger(COOKTIME_KEY);
 		totalCookTime = compound.getInteger(COOKTIMETOTAL_KEY);
@@ -116,15 +113,16 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 
 		super.writeToNBT(compound);
+
+		compound.setTag(INVENTORY_KEY, this.inventory.serializeNBT());
+
 		compound.setInteger(BURNTIME_KEY, (short) burnTime);
 		compound.setInteger(COOKTIME_KEY, (short) cookTime);
 		compound.setInteger(COOKTIMETOTAL_KEY, (short) totalCookTime);
-		if (this.hasCustomName())
-			compound.setString(CUSTOMNAME_KEY, customName);
-		compound.setTag(INVENTORY_KEY, this.inventory.serializeNBT());
 
 		if (hasCustomName())
 			compound.setString(CUSTOMNAME_KEY, customName);
+
 		return compound;
 	}
 
@@ -191,8 +189,6 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 					}
 				}
 			}
-		} else if (inventory.getStackInSlot(0).isEmpty()) {
-			cookTime = 0;
 		}
 		if (!isBurning()) {
 			BlockBlastFurnace.setState(false, world, pos);
@@ -202,6 +198,9 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 				else
 					cookTime = MathHelper.clamp(cookTime - 2, 0, totalCookTime);
 			}
+		}
+		if (inventory.getStackInSlot(0).isEmpty()) {
+			cookTime = 0;
 		}
 //			if (flag != isBurning()) {
 //				flag1 = true;
@@ -312,7 +311,7 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 			return isItemFuel(stack);
 		}
 	}
-	
+
 	public final ArrayList<ItemStack> containerLists() {
 		ArrayList<ItemStack> stackList = new ArrayList(inventory.getSlots());
 		for (int i = 0; i < inventory.getSlots(); i++) {

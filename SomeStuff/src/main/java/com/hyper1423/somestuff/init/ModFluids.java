@@ -3,8 +3,8 @@ package com.hyper1423.somestuff.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hyper1423.somestuff.blocks.BlockFluidMoltenIron;
-import com.hyper1423.somestuff.fluids.FluidMoltenIron;
+import com.hyper1423.somestuff.block.BlockFluidMoltenIron;
+import com.hyper1423.somestuff.fluid.FluidMoltenIron;
 import com.hyper1423.somestuff.util.Reference;
 
 import net.minecraft.util.NonNullList;

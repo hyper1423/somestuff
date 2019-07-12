@@ -25,33 +25,23 @@ public class BlastFurnaceRecipes {
 	}
 
 	public void addRecipe(ItemStack input, ItemStack result, float experience) {
-		if (getResult(input) != ItemStack.EMPTY)
-			return;
+		if (getResult(input) != ItemStack.EMPTY) throw new IllegalArgumentException("Cannot create recipe from already existing recipe");
 		smeltingList.put(input, result);
 		experienceList.put(result, Float.valueOf(experience));
 	}
 
 	public ItemStack getResult(ItemStack input) {
 		for (Entry<ItemStack, ItemStack> entry : smeltingList.entrySet()) {
-			if (compareItemStacks(input, (ItemStack) entry.getKey())) {
+			if (ItemStack.areItemStacksEqual(input, (ItemStack) entry.getKey())) {
 				return (ItemStack) entry.getValue();
 			}
 		}
 		return ItemStack.EMPTY;
 	}
 
-	private boolean compareItemStacks(ItemStack stack1, ItemStack stack2) {
-		return stack2.getItem() == stack1.getItem()
-				&& (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
-	}
-
-	public Map<ItemStack, ItemStack> getDualSmeltingList() {
-		return this.smeltingList;
-	}
-
 	public float getResultExperience(ItemStack stack) {
 		for (Entry<ItemStack, Float> entry : this.experienceList.entrySet()) {
-			if (this.compareItemStacks(stack, (ItemStack) entry.getKey())) {
+			if (ItemStack.areItemStacksEqual(stack, (ItemStack) entry.getKey())) {
 				return ((Float) entry.getValue()).floatValue();
 			}
 		}
