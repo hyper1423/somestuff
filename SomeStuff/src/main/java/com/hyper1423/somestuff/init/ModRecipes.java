@@ -1,5 +1,7 @@
 package com.hyper1423.somestuff.init;
 
+import com.hyper1423.somestuff.recipes.BlastFurnaceRecipes;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -11,6 +13,8 @@ public class ModRecipes {
 		GameRegistry.addSmelting(ModBlocks.PLASTIC_BLOCK, new ItemStack(Blocks.DIAMOND_BLOCK, 1), 1F);
 		GameRegistry.addSmelting(Blocks.DIAMOND_BLOCK, new ItemStack(Blocks.AIR, 1), 1F);
 		GameRegistry.addSmelting(ModBlocks.COPPER_ORE, new ItemStack(ModItems.COPPER_INGOT), 1F);
+		BlastFurnaceRecipes.getInstance().addRecipe(new ItemStack(Blocks.ACACIA_FENCE),
+				new ItemStack(ModItems.SLAG), 5.0F);
 		
 	}
 }

@@ -5,6 +5,7 @@ import com.hyper1423.somestuff.tileentities.TileEntityAlloyingMachine;
 import com.hyper1423.somestuff.tileentities.TileEntityAlloyingMachine.EnumDirection;
 import com.hyper1423.somestuff.tileentities.TileEntityAlloyingMachine.IllegalDirectionException;
 import com.hyper1423.somestuff.util.Reference;
+import com.hyper1423.somestuff.util.helpers.GuiHelper;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -112,9 +113,11 @@ public class GuiAlloyingMachine extends GuiContainer {
 //		TextureMap map = this.mc.getTextureMapBlocks();
 //		TextureAtlasSprite sprite = map.getAtlasSprite(fluid.getStill().toString());
 //		this.mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		mc.renderEngine.bindTexture(null);
+		this.mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		TextureAtlasSprite sprite = this.mc.getTextureMapBlocks().getAtlasSprite(fluid.getStill().toString());
+		
 		int tankScaled = this.getFluidTankScaled(height, fluidTank);
-		this.drawTexturedModalRect(left, top + height - tankScaled, 0, 0, width, tankScaled);
+		GuiHelper.fillRectWithIcon(sprite, left, top, width, height);
 		if (bindTexture)
 			this.mc.getTextureManager().bindTexture(TEXTURES);
 	}

@@ -19,10 +19,7 @@ public class BlastFurnaceRecipes {
 		return INSTANCE;
 	}
 
-	private BlastFurnaceRecipes() {
-		addRecipe(new ItemStack(Blocks.ACACIA_FENCE),
-				new ItemStack(ModItems.SLAG), 5.0F);
-	}
+	private BlastFurnaceRecipes() { }
 
 	public void addRecipe(ItemStack input, ItemStack result, float experience) {
 		if (getResult(input) != ItemStack.EMPTY) throw new IllegalArgumentException("Cannot create recipe from already existing recipe");
