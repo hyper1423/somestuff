@@ -2,12 +2,10 @@ package com.hyper1423.somestuff.tileentities;
 
 import java.util.ArrayList;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.hyper1423.somestuff.block.BlockBlastFurnace;
 import com.hyper1423.somestuff.init.ModItems;
 import com.hyper1423.somestuff.recipes.BlastFurnaceRecipes;
+import com.hyper1423.somestuff.util.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -37,7 +35,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityBlastFurnace extends TileEntity implements ITickable {
@@ -45,7 +42,6 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 	private ItemStackHandler inventory = new ItemStackHandler(NonNullList.withSize(4, ItemStack.EMPTY));
 	private String customName = "";
 	private ItemStack smelting = ItemStack.EMPTY;
-	private static final Logger LOGGER = LogManager.getLogger();
 
 	private static final String BURNTIME_KEY = "BurnTime";
 	private static final String COOKTIME_KEY = "CookTime";
@@ -60,7 +56,7 @@ public class TileEntityBlastFurnace extends TileEntity implements ITickable {
 	public int totalCookTime = 600;
 
 	public TileEntityBlastFurnace() {
-		LOGGER.info("TileEntity is successfully bound to BlastFurnace block");
+		Reference.LOGGER.info("TileEntity is successfully bound to BlastFurnace block");
 	}
 
 	@Override

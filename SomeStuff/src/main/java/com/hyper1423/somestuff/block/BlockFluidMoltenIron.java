@@ -65,10 +65,10 @@ public class BlockFluidMoltenIron extends BlockFluidClassic {
 		double x = pos.getX() + 0.5d;
 		double y = pos.getY() + 0.5d;
 		double z = pos.getZ() + 0.5d;
-		if (worldIn.isRainingAt(pos)) {
+		if (worldIn.isRainingAt(pos.up())) {
 			float randoffset = rand.nextFloat() - 0.5f;
-			worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, x, y + randoffset, z, 0.0D, 0.5D, 0.0D);
+			worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x, y + randoffset, z, 0.0D, 0.05D, 0.0D);
 		}
-		worldIn.playSound(x, y, z, SoundEvents.BLOCK_LAVA_AMBIENT, SoundCategory.BLOCKS, 1.0f, 1.0f, false);
+		worldIn.playSound(x, y, z, SoundEvents.BLOCK_LAVA_AMBIENT, SoundCategory.BLOCKS, 0.5f, 1.0f, false);
 	}
 }

@@ -43,15 +43,16 @@ public class TileEntityAlloyingMachine extends TileEntity implements ITickable {
 	private String customName = "";
 	private ItemStack smelting = ItemStack.EMPTY;
 
-	private static final String MELTINGTIMELEFT_KEY = "MeltingTime";
-	private static final String ALLOYINGTIMELEFT_KEY = "AlloyingTime";
-	private static final String MELTINGTIMERIGHT_KEY = "MeltingTime";
-	private static final String ALLOYINGTIMERIGHT_KEY = "AlloyingTime";
+	private static final String MELTINGTIMELEFT_KEY = "LMeltingTime";
+	private static final String ALLOYINGTIMELEFT_KEY = "LAlloyingTime";
+	private static final String MELTINGTIMERIGHT_KEY = "RMeltingTime";
+	private static final String ALLOYINGTIMERIGHT_KEY = "RAlloyingTime";
 	private static final String TOTALMELTINGTIME_KEY = "TotalMeltingTime";
 	private static final String TOTALALLOYINGTIME_KEY = "TotalAlloyingTime";
 
 	private static final String INVENTORY_KEY = "inventory";
 	private static final String FLUIDINVENTORY_KEY = "fluid";
+	private static final String FLUIDTANK_KEY = "Tank";
 	private static final String CUSTOMNAME_KEY = "CustomName";
 	private static final String ENERGY_KEY = "Energy";
 
@@ -83,12 +84,24 @@ public class TileEntityAlloyingMachine extends TileEntity implements ITickable {
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			return (T) this.inventory;
-		else if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-			return (T) this.fluidInventory;
-		else if (capability == CapabilityEnergy.ENERGY)
+		} else if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+			if (facing == null)
+				return (T) this.fluidInventory;
+			switch (facing) {
+			case WEST:
+				return (T) this.fluidInventory.get(0);
+			case EAST:
+				return (T) this.fluidInventory.get(1);
+			case UP:
+				return (T) this.fluidInventory.get(2);
+			default:
+				return (T) this.fluidInventory;
+			}
+		} else if (capability == CapabilityEnergy.ENERGY) {
 			return (T) this.energyStorage;
+		}
 		return super.getCapability(capability, facing);
 	}
 
@@ -111,6 +124,7 @@ public class TileEntityAlloyingMachine extends TileEntity implements ITickable {
 	public void readFromNBT(NBTTagCompound compound) {
 
 		NBTTagCompound energyCompound = compound.getCompoundTag(ENERGY_KEY);
+		NBTTagCompound fluidInventoryCompound = compound.getCompoundTag(FLUIDINVENTORY_KEY);
 
 		super.readFromNBT(compound);
 		this.inventory.deserializeNBT(compound.getCompoundTag(INVENTORY_KEY));
@@ -126,8 +140,8 @@ public class TileEntityAlloyingMachine extends TileEntity implements ITickable {
 		customName = compound.getString(CUSTOMNAME_KEY);
 
 		for (int index = 0; index < fluidInventory.size(); index++) {
-			fluidInventory.set(index, fluidInventory.get(index).readFromNBT(
-					(NBTTagCompound) ((NBTTagCompound) compound.getTag(FLUIDINVENTORY_KEY)).getTag("Tank" + index)));
+			NBTTagCompound fluidTankCompound = fluidInventoryCompound.getCompoundTag(FLUIDTANK_KEY + index);
+			fluidInventory.get(index).readFromNBT(fluidTankCompound);
 		}
 
 		if (compound.hasKey(CUSTOMNAME_KEY, 8))
@@ -138,6 +152,7 @@ public class TileEntityAlloyingMachine extends TileEntity implements ITickable {
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 
 		NBTTagCompound energyCompound = new NBTTagCompound();
+		NBTTagCompound fluidInventoryCompound = new NBTTagCompound();
 
 		super.writeToNBT(compound);
 		compound.setTag(INVENTORY_KEY, this.inventory.serializeNBT());
@@ -152,10 +167,11 @@ public class TileEntityAlloyingMachine extends TileEntity implements ITickable {
 		compound.setInteger(TOTALALLOYINGTIME_KEY, totalAlloyingTime);
 
 		for (int index = 0; index < fluidInventory.size(); index++) {
-			NBTTagCompound fluidInventoryCompound = new NBTTagCompound();
-			fluidInventoryCompound.setTag("Tank" + index, fluidInventory.get(index).writeToNBT(fluidInventoryCompound));
-			compound.setTag(FLUIDINVENTORY_KEY, fluidInventoryCompound);
+			NBTTagCompound fluidTankCompound = new NBTTagCompound();
+			fluidInventory.get(index).writeToNBT(fluidTankCompound);
+			fluidInventoryCompound.setTag(FLUIDTANK_KEY + index, fluidTankCompound);
 		}
+		compound.setTag(FLUIDINVENTORY_KEY, fluidInventoryCompound);
 
 		if (hasCustomName())
 			compound.setString(CUSTOMNAME_KEY, customName);
@@ -169,19 +185,22 @@ public class TileEntityAlloyingMachine extends TileEntity implements ITickable {
 		case RIGHT:
 			return meltingTimeRight > 0;
 		default:
-			throw new TileEntityAlloyingMachine.IllegalDirectionException("You can only put EnumDirection.LEFT or EnumDirection.RIGHT in index.");
+			throw new TileEntityAlloyingMachine.IllegalDirectionException(
+					"You can only put EnumDirection.LEFT or EnumDirection.RIGHT in index.");
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static boolean isMelting(TileEntityAlloyingMachine te, EnumDirection index) throws IllegalDirectionException {
+	public static boolean isMelting(TileEntityAlloyingMachine te, EnumDirection index)
+			throws IllegalDirectionException {
 		switch (index) {
 		case LEFT:
 			return te.meltingTimeLeft > 0;
 		case RIGHT:
 			return te.meltingTimeRight > 0;
 		default:
-			throw new TileEntityAlloyingMachine.IllegalDirectionException("You can only put EnumDirection.LEFT or EnumDirection.RIGHT in index.");
+			throw new TileEntityAlloyingMachine.IllegalDirectionException(
+					"You can only put EnumDirection.LEFT or EnumDirection.RIGHT in index.");
 		}
 	}
 
@@ -192,25 +211,27 @@ public class TileEntityAlloyingMachine extends TileEntity implements ITickable {
 		case RIGHT:
 			return meltingTimeRight > 0;
 		default:
-			throw new TileEntityAlloyingMachine.IllegalDirectionException("You can only put EnumDirection.LEFT or EnumDirection.RIGHT in index.");
+			throw new TileEntityAlloyingMachine.IllegalDirectionException(
+					"You can only put EnumDirection.LEFT or EnumDirection.RIGHT in index.");
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static boolean isAlloying(TileEntityAlloyingMachine te, EnumDirection index) throws IllegalDirectionException {
+	public static boolean isAlloying(TileEntityAlloyingMachine te, EnumDirection index)
+			throws IllegalDirectionException {
 		switch (index) {
 		case LEFT:
 			return te.meltingTimeLeft > 0;
 		case RIGHT:
 			return te.meltingTimeRight > 0;
 		default:
-			throw new TileEntityAlloyingMachine.IllegalDirectionException("You can only put EnumDirection.LEFT or EnumDirection.RIGHT in index.");
+			throw new TileEntityAlloyingMachine.IllegalDirectionException(
+					"You can only put EnumDirection.LEFT or EnumDirection.RIGHT in index.");
 		}
 	}
 
 	@Override
 	public void update() {
-
 	}
 
 	private boolean canAlloy() {
@@ -295,7 +316,7 @@ public class TileEntityAlloyingMachine extends TileEntity implements ITickable {
 			return toString;
 		}
 	}
-	
+
 	public static class IllegalDirectionException extends IllegalArgumentException {
 		public IllegalDirectionException(String msg) {
 			super(msg);

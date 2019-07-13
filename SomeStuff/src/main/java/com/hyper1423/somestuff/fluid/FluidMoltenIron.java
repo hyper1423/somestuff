@@ -19,9 +19,9 @@ public class FluidMoltenIron extends Fluid {
 		setViscosity(6000);
 		setGaseous(false);
 		setRarity(EnumRarity.UNCOMMON);
-		//setFillSound(new SoundEvent(new ResourceLocation("minecraft", "item.bucket.fill_lava")));
+		
 		setFillSound(SoundEvents.ITEM_BUCKET_FILL_LAVA);
-		setEmptySound(new SoundEvent(new ResourceLocation("minecraft", "item.bucket.empty_lava")));
+		setEmptySound(SoundEvents.ITEM_BUCKET_EMPTY_LAVA);
 		
 		ModFluids.FLUIDS.add(this);
 	}

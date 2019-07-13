@@ -37,7 +37,6 @@ public class RegistryHandler {
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
 
 		event.getRegistry().registerAll(ModBlocks.BLOCKS.toArray(new Block[0]));
-		TileEntityHandler.registerTileEntities();
 	}
 	
 	@SubscribeEvent
@@ -62,6 +61,7 @@ public class RegistryHandler {
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
 		OreDictionaryCompat.registerOres();
 		ModRecipes.init();
+		TileEntityHandler.registerTileEntities();
 	}
 	
 	public static void postInitRegistries() {

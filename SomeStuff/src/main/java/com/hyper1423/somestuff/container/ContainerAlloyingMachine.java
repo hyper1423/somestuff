@@ -26,8 +26,10 @@ public class ContainerAlloyingMachine extends Container {
 		if (this.tileentity != null) {
 			IItemHandler inventory = this.tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-			this.addSlotToContainer(new SlotItemHandler(inventory, 0, 35, 17));
-			this.addSlotToContainer(new SlotBlastFurnaceOutput(player.player, inventory, 1, 143, 53));
+			this.addSlotToContainer(new SlotItemHandler(inventory, 0, 42, 51));
+			this.addSlotToContainer(new SlotItemHandler(inventory, 1, 90, 51));
+			this.addSlotToContainer(new SlotBlastFurnaceOutput(player.player, inventory, 2, 66, 61));
+			this.addSlotToContainer(new SlotItemHandler(inventory, 3, 150, 64));
 
 			for (int y = 0; y < 3; y++) {
 				for (int x = 0; x < 9; x++) {

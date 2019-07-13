@@ -19,25 +19,28 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.UniversalBucket;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 public class BlockAlloyingMachine extends Block {
 
@@ -84,8 +87,49 @@ public class BlockAlloyingMachine extends Block {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+//		if (playerIn.hasItemInSlot(EntityEquipmentSlot.MAINHAND)) {
+//			Reference.LOGGER.info("line 93 activated");
+//			ItemStack bucket = playerIn.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
+//			if (bucket.getItem() instanceof UniversalBucket) {
+//				Reference.LOGGER.info("line 96 activated: item holding is instance of UniversalBucket");
+//				if (((UniversalBucket) bucket.getItem()).getFluid(bucket) != null) {
+//					if (worldIn.getTileEntity(pos) instanceof TileEntityAlloyingMachine) {
+//						Reference.LOGGER.info("line 98 activated");
+//						FluidTank tank0 = (FluidTank) ((TileEntityAlloyingMachine) worldIn.getTileEntity(pos))
+//								.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.WEST);
+//						
+//						FluidTank tank1 = (FluidTank) ((TileEntityAlloyingMachine) worldIn.getTileEntity(pos))
+//								.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.EAST);
+//						
+//						FluidTank tank2 = (FluidTank) ((TileEntityAlloyingMachine) worldIn.getTileEntity(pos))
+//								.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
+//						
+//						if (tank0.getFluidAmount() + Fluid.BUCKET_VOLUME <= tank0.getCapacity())
+//							
+//							((TileEntityAlloyingMachine) worldIn.getTileEntity(pos))
+//									.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.WEST)
+//									.fill(new FluidStack(((UniversalBucket) bucket.getItem()).getFluid(bucket),
+//											Fluid.BUCKET_VOLUME), true);
+//					}
+//				}
+//			}
+//		}
+		if (playerIn.getHeldItemMainhand().getItem() instanceof UniversalBucket || playerIn.getHeldItemMainhand().getItem() instanceof ItemBucket) {
+			if (!FluidUtil.interactWithFluidHandler(playerIn, hand,
+					((TileEntityAlloyingMachine) worldIn.getTileEntity(pos))
+							.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.WEST))) {
 
-		if (!worldIn.isRemote) {
+				if (!FluidUtil.interactWithFluidHandler(playerIn, hand,
+						((TileEntityAlloyingMachine) worldIn.getTileEntity(pos))
+								.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.EAST)))
+
+					FluidUtil.tryFillContainerAndStow(playerIn.getHeldItemMainhand(),
+							((TileEntityAlloyingMachine) worldIn.getTileEntity(pos))
+									.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP),
+							playerIn.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null),
+							Fluid.BUCKET_VOLUME, playerIn, true);
+			}
+		} else if (!worldIn.isRemote) {
 			playerIn.openGui(Main.instance, Reference.GUI_ALLOYING_MACHINE, worldIn, pos.getX(), pos.getY(),
 					pos.getZ());
 		}
