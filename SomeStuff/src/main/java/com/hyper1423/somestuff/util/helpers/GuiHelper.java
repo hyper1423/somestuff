@@ -2,7 +2,6 @@ package com.hyper1423.somestuff.util.helpers;
 
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 
-import java.awt.Rectangle;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
@@ -100,22 +99,12 @@ public final class GuiHelper {
 	static {
 		Field field = null;
 		try {
-			field = Gui.class.getDeclaredField("zLevel");
+			field = Gui.class.getDeclaredField(ObfuscatedNameHelper.getFieldObfName("zLevel", Gui.class));
 			field.setAccessible(true);
 		} catch (NoSuchFieldException e) {
-			Reference.LOGGER.error("Detected obfuscated environment");
-			try {
-				field = Gui.class.getDeclaredField("field_73735_i");
-				field.setAccessible(true);
-			} catch (NoSuchFieldException e1) {
-				Reference.LOGGER.error("Cannot find field");
-				Reference.LOGGER.catching(e);
-				throw new RuntimeException(e);
-			} catch (SecurityException e1) {
-				Reference.LOGGER.error("Could not access to the field");
-				Reference.LOGGER.catching(e);
-				throw new RuntimeException(e);
-			}
+			Reference.LOGGER.error("There is no such field");
+			Reference.LOGGER.catching(e);
+			throw new RuntimeException(e);
 		} catch (SecurityException e) {
 			Reference.LOGGER.error("Could not access to the field");
 			Reference.LOGGER.catching(e);
