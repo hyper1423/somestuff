@@ -99,25 +99,9 @@ public class GuiAlloyingMachine extends GuiContainer {
 			Reference.LOGGER.info("The texture of given Fluid is null. Maybe you forgot to register textures?");
 			return;
 		}
-
-		Fluid fluid = fluidTank.getFluid().getFluid();
-
-		this.mc.getTextureManager().bindTexture(new ResourceLocation(fluid.getStill().getResourceDomain(),
-				"textures/" + fluid.getStill().getResourcePath() + ".png"));
-		
-//		BufferedImage image = new BufferedImage(16, 320, BufferedImage.TYPE_INT_ARGB);
-//		Graphics2D graphic = image.createGraphics();
-//		graphic.drawImage(this.mc.getTextureManager()., 0, 0, image.getWidth(), image.getHeight(), null);
-//		DynamicTexture dynamicImage = new DynamicTexture(image);
-		
-//		TextureMap map = this.mc.getTextureMapBlocks();
-//		TextureAtlasSprite sprite = map.getAtlasSprite(fluid.getStill().toString());
-//		this.mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		this.mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		TextureAtlasSprite sprite = this.mc.getTextureMapBlocks().getAtlasSprite(fluid.getStill().toString());
 		
 		int tankScaled = this.getFluidTankScaled(height, fluidTank);
-		GuiHelper.fillRectWithIcon(sprite, left, top, width, height);
+		GuiHelper.renderRectWithFluidTank(fluidTank, left, top, this.zLevel, width, height);
 		if (bindTexture)
 			this.mc.getTextureManager().bindTexture(TEXTURES);
 	}

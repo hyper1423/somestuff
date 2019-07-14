@@ -5,6 +5,7 @@ import java.util.Random;
 import com.hyper1423.somestuff.Main;
 import com.hyper1423.somestuff.block.materials.ModMaterials;
 import com.hyper1423.somestuff.init.ModBlocks;
+import com.hyper1423.somestuff.init.ModFluids;
 import com.hyper1423.somestuff.init.ModItems;
 
 import net.minecraft.block.state.IBlockState;
@@ -35,7 +36,9 @@ public class BlockFluidMoltenIron extends BlockFluidClassic {
 		setDensity(6980);
 		setTemperature(1811);
 		setLightLevel(1.0f);
+		setQuantaPerBlock(4);
 
+		ModFluids.BLOCKFLUIDS.add(this);
 		ModBlocks.BLOCKS.add(this);
 		ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}

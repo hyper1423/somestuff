@@ -29,11 +29,6 @@ public class Main {
 	static { FluidRegistry.enableUniversalBucket(); }
 	
 	@EventHandler
-	public static void Construct(FMLConstructionEvent event) {
-		
-	}
-	
-	@EventHandler
 	public static void PreInit(FMLPreInitializationEvent event) {
 		RegistryHandler.preInitRegistries();
 	}

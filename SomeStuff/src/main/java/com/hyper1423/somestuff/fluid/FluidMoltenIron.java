@@ -24,5 +24,6 @@ public class FluidMoltenIron extends Fluid {
 		setEmptySound(SoundEvents.ITEM_BUCKET_EMPTY_LAVA);
 		
 		ModFluids.FLUIDS.add(this);
+		ModFluids.BUCKETLIST.add(this);
 	}
 }

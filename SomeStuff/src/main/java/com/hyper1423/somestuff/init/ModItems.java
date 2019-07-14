@@ -15,6 +15,7 @@ import com.hyper1423.somestuff.item.tools.ToolHoe;
 import com.hyper1423.somestuff.item.tools.ToolPickaxe;
 import com.hyper1423.somestuff.item.tools.ToolSpade;
 import com.hyper1423.somestuff.item.tools.ToolSword;
+import com.hyper1423.somestuff.util.Reference;
 
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -28,6 +29,7 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 public class ModItems {
 	public static final List<Item> ITEMS = new ArrayList<Item>();
