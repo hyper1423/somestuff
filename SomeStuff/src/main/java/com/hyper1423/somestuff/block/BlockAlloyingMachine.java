@@ -20,8 +20,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBucket;
@@ -35,8 +33,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -114,20 +111,24 @@ public class BlockAlloyingMachine extends Block {
 //				}
 //			}
 //		}
-		if (playerIn.getHeldItemMainhand().getItem() instanceof UniversalBucket || playerIn.getHeldItemMainhand().getItem() instanceof ItemBucket) {
+		if (playerIn.getHeldItemMainhand().getItem() instanceof UniversalBucket
+				|| playerIn.getHeldItemMainhand().getItem() instanceof ItemBucket) {
 			if (!FluidUtil.interactWithFluidHandler(playerIn, hand,
 					((TileEntityAlloyingMachine) worldIn.getTileEntity(pos))
 							.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.WEST))) {
+				Reference.LOGGER.info("line 121 executed");
 
 				if (!FluidUtil.interactWithFluidHandler(playerIn, hand,
 						((TileEntityAlloyingMachine) worldIn.getTileEntity(pos))
-								.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.EAST)))
-
-					FluidUtil.tryFillContainerAndStow(playerIn.getHeldItemMainhand(),
+								.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.EAST))) {
+					Reference.LOGGER.info("line 127 executed");
+					FluidActionResult res = FluidUtil.tryFillContainerAndStow(playerIn.getHeldItemMainhand(),
 							((TileEntityAlloyingMachine) worldIn.getTileEntity(pos))
 									.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP),
 							playerIn.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null),
 							Fluid.BUCKET_VOLUME, playerIn, true);
+					Reference.LOGGER.info("line 133 executed: {}", res.success);
+				}
 			}
 		} else if (!worldIn.isRemote) {
 			playerIn.openGui(Main.instance, Reference.GUI_ALLOYING_MACHINE, worldIn, pos.getX(), pos.getY(),
